@@ -1,0 +1,55 @@
+<header class="navbar">
+  <div class="navbar-inner">
+
+    <!-- Logo -->
+    <a routerLink="/" class="logo">
+      <svg class="logo-icon" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="6" fill="#3737f0"/>
+        <path d="M7 9h14M7 14h10M7 19h12"
+              stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">eventflow</span>
+    </a>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+
+      <div class="search-segment">
+        <mat-icon class="seg-icon">search</mat-icon>
+        <input
+          class="seg-input"
+          type="text"
+          placeholder="Search events"
+          [(ngModel)]="searchQuery"
+          (keydown.enter)="onSearch()"
+        />
+      </div>
+
+      <div class="search-divider"></div>
+
+      <div class="search-segment">
+        <mat-icon class="seg-icon loc-icon">place</mat-icon>
+        <input
+          class="seg-input"
+          type="text"
+          placeholder="Location"
+          [(ngModel)]="location"
+        />
+      </div>
+
+      <button class="search-btn" (click)="onSearch()" aria-label="Search">
+        <mat-icon>search</mat-icon>
+      </button>
+
+    </div>
+
+    <nav class="nav-right">
+      <a routerLink="/" class="nav-link">Find Events</a>
+      <a routerLink="/create" class="nav-link">Create Events</a>
+      <div class="nav-divider"></div>
+      <a routerLink="/my-tickets" class="nav-link">Find my tickets</a>
+      <a routerLink="/login" class="nav-link sign-in">Sign in</a>
+    </nav>
+
+  </div>
+</header>

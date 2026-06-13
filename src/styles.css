@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$red-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-size: clamp(14px, 1.2vw, 20px); }
+body { font-family: Roboto, "Helvetica Neue", sans-serif; background: #000; }
+app-root { display: block; min-height: 100vh; }
