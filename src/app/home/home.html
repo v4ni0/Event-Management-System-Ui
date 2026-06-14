@@ -1,1 +1,59 @@
-<app-navbar />
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Discover events that move you.</h1>
+    <p>Concerts, workshops, conferences, and meetups — all in one place.</p>
+    <div class="hero-cta">
+      <a mat-flat-button color="primary" routerLink="/events">
+        <mat-icon>search</mat-icon> Browse events
+      </a>
+      <a mat-stroked-button routerLink="/speakers">Meet the speakers</a>
+    </div>
+  </div>
+</section>
+
+<section class="page-container wide">
+  <div class="featured-head">
+    <h2>Happening soon</h2>
+    <a mat-button routerLink="/events">See all <mat-icon>arrow_forward</mat-icon></a>
+  </div>
+
+  @if (loading()) {
+    <div class="center-spinner"><mat-spinner diameter="40"></mat-spinner></div>
+  } @else if (events().length) {
+    <div class="grid">
+      @for (event of events(); track event.id) {
+        <mat-card class="event-card" [routerLink]="['/events', event.id]">
+          @if (event.imageUrl) {
+            <img mat-card-image [src]="event.imageUrl" [alt]="event.title" />
+          } @else {
+            <div class="image-placeholder"><mat-icon>event</mat-icon></div>
+          }
+          <mat-card-content>
+            <div class="card-meta">
+              <app-status-chip [status]="event.status"></app-status-chip>
+              @if (event.category) {
+                <span class="category">{{ pretty(event.category) }}</span>
+              }
+            </div>
+            <h3>{{ event.title }}</h3>
+            <p class="when">{{ format(event.startDate) }}</p>
+            @if (event.city || event.venue) {
+              <p class="where">
+                <mat-icon>place</mat-icon>
+                {{ event.venue || event.city }}{{ event.venue && event.city ? ', ' + event.city : '' }}
+              </p>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  } @else {
+    <app-empty-state
+      icon="event_busy"
+      title="No published events yet"
+      message="Check back soon — or sign up as an organizer to create one."
+    >
+      <a mat-flat-button color="primary" routerLink="/register">Sign up</a>
+    </app-empty-state>
+  }
+</section>
