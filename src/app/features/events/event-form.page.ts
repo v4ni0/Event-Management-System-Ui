@@ -24,6 +24,7 @@ import {
 } from '../../core/models/enums';
 import { toBackendDateTime } from '../../core/util/date';
 import { PageHeaderComponent } from '../../shared/page-header.component';
+import { ImageUploadComponent } from '../../shared/image-upload.component';
 
 @Component({
   selector: 'app-event-form-page',
@@ -42,6 +43,7 @@ import { PageHeaderComponent } from '../../shared/page-header.component';
     MatIconModule,
     MatProgressSpinnerModule,
     PageHeaderComponent,
+    ImageUploadComponent
   ],
   template: `
     <div class="page-container">
@@ -129,10 +131,9 @@ import { PageHeaderComponent } from '../../shared/page-header.component';
                 }
               </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Image URL</mat-label>
-              <input matInput formControlName="imageUrl" placeholder="https://..." />
-            </mat-form-field>
+            <label class="field-label">Cover image</label>
+            <app-image-upload formControlName="imageUrl" label="No cover image yet"></app-image-upload>
+           
 
             <div class="actions">
               <button mat-button type="button" routerLink="/events">Cancel</button>
@@ -161,6 +162,12 @@ import { PageHeaderComponent } from '../../shared/page-header.component';
       .row { display: flex; gap: 12px; }
       .row > * { flex: 1; }
       .full-width { width: 100%; }
+      .field-label {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--mat-sys-on-surface-variant);
+        margin: 8px 0 6px;
+       }
       .actions {
         display: flex;
         justify-content: flex-end;

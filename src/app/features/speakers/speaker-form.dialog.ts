@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SpeakerRequest, SpeakerResponse } from '../../core/models/speaker';
+import { ImageUploadComponent } from '../../shared/image-upload.component';
 
 export interface SpeakerFormDialogData {
   speaker?: SpeakerResponse;
@@ -21,6 +22,7 @@ export interface SpeakerFormDialogData {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    ImageUploadComponent
   ],
   template: `
     <h2 mat-dialog-title>{{ data?.speaker ? 'Edit speaker' : 'Add speaker' }}</h2>
@@ -42,10 +44,8 @@ export interface SpeakerFormDialogData {
           <mat-label>Bio</mat-label>
           <textarea matInput rows="3" formControlName="bio"></textarea>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Photo URL</mat-label>
-          <input matInput formControlName="photoUrl" placeholder="https://..." />
-        </mat-form-field>
+        <label class="field-label">Photo</label>
+        <app-image-upload formControlName="photoUrl" label="No photo yet"></app-image-upload>
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Website URL</mat-label>
           <input matInput formControlName="websiteUrl" placeholder="https://..." />
@@ -65,6 +65,12 @@ export interface SpeakerFormDialogData {
     `
       .form { display: flex; flex-direction: column; gap: 4px; min-width: 380px; }
       .full-width { width: 100%; }
+      .field-label {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--mat-sys-on-surface-variant);
+        margin: 8px 0 6px;
+      }
     `,
   ],
 })
