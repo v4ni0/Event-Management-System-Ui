@@ -1,0 +1,5 @@
+:host { display: block; margin-bottom: 24px; }
+.title-row { display: flex; align-items: center; gap: 16px; }
+h1 { margin: 0; font-size: 1.75rem; font-weight: 500; flex: 1; }
+.subtitle { margin: 8px 0 0; color: var(--mat-sys-on-surface-variant); }
+.actions { display: flex; gap: 8px; align-items: center; }

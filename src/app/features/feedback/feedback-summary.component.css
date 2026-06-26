@@ -1,0 +1,15 @@
+.summary {
+  display: flex;
+  gap: 32px;
+  padding: 16px;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+.overall { display: flex; flex-direction: column; align-items: center; min-width: 120px; }
+.big { font-size: 2.4rem; font-weight: 600; line-height: 1.1; }
+.stars { display: inline-flex; }
+.stars mat-icon { color: var(--mat-sys-outline); font-size: 20px; width: 20px; height: 20px; }
+.stars mat-icon.filled { color: #f5b400; }
+.breakdown { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 200px; }
+.row { display: flex; justify-content: space-between; gap: 16px; }

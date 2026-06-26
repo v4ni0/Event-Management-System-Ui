@@ -1,0 +1,13 @@
+mat-dialog-content { min-width: 360px; }
+.radio-list { display: flex; flex-direction: column; gap: 6px; }
+.radio-row { padding: 8px 0; }
+.row-content {
+  display: inline-flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.price { font-weight: 600; }
+.muted { color: var(--mat-sys-on-surface-variant); }
+.small { font-size: 0.85rem; }

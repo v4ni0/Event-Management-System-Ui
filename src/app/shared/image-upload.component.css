@@ -1,0 +1,37 @@
+:host { display: block; }
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.preview {
+  max-width: 100%;
+  max-height: 240px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--mat-sys-outline-variant);
+}
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 160px;
+  border: 1px dashed var(--mat-sys-outline);
+  border-radius: 8px;
+  color: var(--mat-sys-on-surface-variant);
+}
+.placeholder mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.actions button { display: inline-flex; align-items: center; gap: 6px; }

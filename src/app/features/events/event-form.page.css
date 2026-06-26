@@ -1,0 +1,21 @@
+mat-card { padding: 24px; }
+form { display: flex; flex-direction: column; gap: 4px; }
+.row { display: flex; gap: 12px; }
+.row > * { flex: 1; }
+.full-width { width: 100%; }
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--mat-sys-on-surface-variant);
+  margin: 8px 0 6px;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+mat-spinner { margin: 0 8px; }
+@media (max-width: 600px) {
+  .row { flex-direction: column; gap: 0; }
+}

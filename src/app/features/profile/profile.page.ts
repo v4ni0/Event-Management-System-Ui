@@ -28,66 +28,8 @@ import { formatDateTime } from '../../core/util/date';
     PageHeaderComponent,
     RoleChipComponent,
   ],
-  template: `
-    <div class="page-container">
-      <app-page-header title="Your profile"></app-page-header>
-
-      @if (loading()) {
-        <div class="center-spinner"><mat-spinner diameter="40"></mat-spinner></div>
-      } @else {
-        <mat-card>
-          <div class="header">
-            <div>
-              <div class="muted">Account</div>
-              <h2>{{ form.controls.firstName.value }} {{ form.controls.lastName.value }}</h2>
-              @if (auth.currentUser; as u) {
-                <div class="meta">
-                  <app-role-chip [role]="u.role"></app-role-chip>
-                  <span class="text-muted text-small">Member since {{ format(u.createdAt) }}</span>
-                </div>
-              }
-            </div>
-          </div>
-
-          <form [formGroup]="form" (ngSubmit)="save()">
-            <div class="row">
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>First name</mat-label>
-                <input matInput formControlName="firstName" />
-              </mat-form-field>
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Last name</mat-label>
-                <input matInput formControlName="lastName" />
-              </mat-form-field>
-            </div>
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" formControlName="email" />
-            </mat-form-field>
-            <div class="actions">
-              <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || saving()">
-                @if (saving()) { <mat-spinner diameter="18"></mat-spinner> } @else { Save changes }
-              </button>
-            </div>
-          </form>
-        </mat-card>
-      }
-    </div>
-  `,
-  styles: [
-    `
-      mat-card { padding: 24px; }
-      .header { margin-bottom: 24px; }
-      .header h2 { margin: 4px 0 8px; font-weight: 500; }
-      .meta { display: flex; align-items: center; gap: 12px; }
-      .muted { color: var(--mat-sys-on-surface-variant); font-size: 0.85rem; }
-      form { display: flex; flex-direction: column; gap: 4px; }
-      .row { display: flex; gap: 12px; }
-      .row > * { flex: 1; }
-      .full-width { width: 100%; }
-      .actions { display: flex; justify-content: flex-end; margin-top: 8px; }
-    `,
-  ],
+  templateUrl: './profile.page.html',
+  styleUrl: './profile.page.css',
 })
 export class ProfilePage implements OnInit {
   readonly auth = inject(AuthService);

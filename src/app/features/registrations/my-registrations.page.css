@@ -1,0 +1,10 @@
+mat-card { padding: 0; overflow: hidden; }
+table { width: 100%; }
+mat-paginator { background: transparent; margin-top: 8px; }
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--mat-sys-surface-variant);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}

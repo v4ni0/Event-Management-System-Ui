@@ -14,22 +14,8 @@ export interface ConfirmDialogData {
   selector: 'app-confirm-dialog',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
-  template: `
-    <h2 mat-dialog-title>{{ data.title ?? 'Are you sure?' }}</h2>
-    <mat-dialog-content>{{ data.message }}</mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button [mat-dialog-close]="false">
-        {{ data.cancelText ?? 'Cancel' }}
-      </button>
-      <button
-        mat-flat-button
-        [color]="data.destructive ? 'warn' : 'primary'"
-        [mat-dialog-close]="true"
-      >
-        {{ data.confirmText ?? 'Confirm' }}
-      </button>
-    </mat-dialog-actions>
-  `,
+  templateUrl: './confirm-dialog.component.html',
+  styleUrl: './confirm-dialog.component.css',
 })
 export class ConfirmDialogComponent {
   readonly data = inject<ConfirmDialogData>(MAT_DIALOG_DATA);

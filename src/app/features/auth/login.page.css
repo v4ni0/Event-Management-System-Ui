@@ -1,0 +1,13 @@
+.auth-shell {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+.auth-card { width: 100%; max-width: 420px; padding: 8px 4px 16px; }
+mat-card-header { margin-bottom: 16px; }
+form { display: flex; flex-direction: column; gap: 8px; }
+.full-width { width: 100%; }
+.hint { margin-top: 16px; text-align: center; font-size: 0.9rem; }
+mat-spinner { margin: 0 auto; }

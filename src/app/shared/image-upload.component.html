@@ -1,0 +1,43 @@
+<div class="image-upload">
+  @if (currentUrl()) {
+    <img [src]="currentUrl()" alt="Uploaded image preview" class="preview" />
+  } @else {
+    <div class="placeholder">
+      <mat-icon>image</mat-icon>
+      <span>{{ label() }}</span>
+    </div>
+  }
+
+  <div class="actions">
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="trigger()"
+      [disabled]="disabled() || uploading()"
+    >
+      @if (uploading()) {
+        <mat-spinner diameter="18"></mat-spinner>
+        <span>Uploading…</span>
+      } @else {
+        <ng-container>
+          <mat-icon>upload</mat-icon>
+          <span>{{ currentUrl() ? 'Replace image' : 'Upload image' }}</span>
+        </ng-container>
+      }
+    </button>
+    @if (currentUrl() && !disabled() && !uploading()) {
+      <button mat-button color="warn" type="button" (click)="clear()">
+        <mat-icon>delete</mat-icon>
+        <span>Remove</span>
+      </button>
+    }
+  </div>
+
+  <input
+    #fileInput
+    type="file"
+    accept="image/*"
+    hidden
+    (change)="onFile($event)"
+  />
+</div>

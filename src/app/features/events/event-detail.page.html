@@ -1,0 +1,147 @@
+@if (loading()) {
+  <div class="page-container"><div class="center-spinner"><mat-spinner diameter="40"></mat-spinner></div></div>
+} @else if (event(); as e) {
+  <div class="hero">
+    @if (e.imageUrl) {
+      <img [src]="e.imageUrl" [alt]="e.title" />
+    } @else {
+      <div class="placeholder"><mat-icon>event</mat-icon></div>
+    }
+  </div>
+
+  <div class="page-container">
+    <div class="title-row">
+      <div>
+        <div class="meta-row">
+          <app-status-chip [status]="e.status"></app-status-chip>
+          @if (e.category) {
+            <mat-chip disableRipple class="cat-chip">{{ pretty(e.category) }}</mat-chip>
+          }
+        </div>
+        <h1>{{ e.title }}</h1>
+        <div class="info-row">
+          <span><mat-icon>schedule</mat-icon>{{ format(e.startDate) }} → {{ format(e.endDate) }}</span>
+          @if (e.venue || e.city) {
+            <span><mat-icon>place</mat-icon>{{ e.venue || '' }}{{ e.venue && e.city ? ', ' : '' }}{{ e.city || '' }}</span>
+          }
+          <span><mat-icon>group</mat-icon>{{ e.capacity }} capacity</span>
+        </div>
+      </div>
+      <div class="actions">
+        @if (canBuy()) {
+          <button mat-flat-button color="primary" (click)="openPurchase()">
+            <mat-icon>local_activity</mat-icon> Get tickets
+          </button>
+        }
+        <button
+          mat-stroked-button
+          (click)="openFeedback()"
+          [disabled]="!canSubmitFeedback()"
+          [matTooltip]="feedbackTooltip()"
+        >
+          <mat-icon>rate_review</mat-icon> Leave feedback
+        </button>
+        @if (canManage()) {
+          <a mat-stroked-button [routerLink]="['/events', e.id, 'registrations']">
+            <mat-icon>how_to_reg</mat-icon> Registrations
+          </a>
+          <a mat-stroked-button [routerLink]="['/events', e.id, 'analytics']">
+            <mat-icon>insights</mat-icon> Analytics
+          </a>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="More">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <a mat-menu-item [routerLink]="['/events', e.id, 'edit']">
+              <mat-icon>edit</mat-icon><span>Edit event</span>
+            </a>
+            @for (s of statuses; track s) {
+              @if (s !== e.status) {
+                <button mat-menu-item (click)="changeStatus(s)">
+                  <mat-icon>flag</mat-icon><span>Mark {{ pretty(s) }}</span>
+                </button>
+              }
+            }
+            <button mat-menu-item (click)="remove()" class="warn">
+              <mat-icon>delete</mat-icon><span>Delete event</span>
+            </button>
+          </mat-menu>
+        }
+      </div>
+    </div>
+
+    @if (e.description) {
+      <p class="description">{{ e.description }}</p>
+    }
+
+    <mat-tab-group dynamicHeight class="tabs">
+      <mat-tab label="Overview">
+        <div class="tab-body">
+          <h3>Stats</h3>
+          <app-event-summary [eventId]="e.id"></app-event-summary>
+
+          <h3 class="mt-24">Feedback</h3>
+          <app-feedback-summary [eventId]="e.id"></app-feedback-summary>
+
+          @if (e.venueAddress) {
+            <h3 class="mt-24">Venue address</h3>
+            <p>{{ e.venueAddress }}</p>
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Tickets">
+        <div class="tab-body">
+          @if (canManage()) {
+            <app-ticket-admin-list [eventId]="e.id"></app-ticket-admin-list>
+          } @else {
+            @if (tickets().length) {
+              <ul class="public-tickets">
+                @for (t of tickets(); track t.id) {
+                  <li>
+                    <div>
+                      <strong>{{ t.name }}</strong>
+                      @if (t.description) {
+                        <div class="text-muted text-small">{{ t.description }}</div>
+                      }
+                      <div class="text-small text-muted">
+                        {{ t.quantityAvailable - t.quantitySold }} of {{ t.quantityAvailable }} left
+                      </div>
+                    </div>
+                    <div class="price-col">
+                      <div class="price">{{ t.price | number: '1.2-2' }}</div>
+                      <app-status-chip [status]="t.status"></app-status-chip>
+                    </div>
+                  </li>
+                }
+              </ul>
+              @if (canBuy()) {
+                <button mat-flat-button color="primary" (click)="openPurchase()" class="mt-16">
+                  <mat-icon>shopping_cart</mat-icon> Get a ticket
+                </button>
+              }
+            } @else {
+              <p class="text-muted">No tickets yet.</p>
+            }
+          }
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Agenda">
+        <div class="tab-body">
+          <app-agenda-list [eventId]="e.id" [canEdit]="canManage()"></app-agenda-list>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Feedback">
+        <div class="tab-body">
+          <app-feedback-summary [eventId]="e.id"></app-feedback-summary>
+          @if (canManage()) {
+            <h3 class="mt-24">All reviews</h3>
+            <app-feedback-list [eventId]="e.id"></app-feedback-list>
+          }
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+}

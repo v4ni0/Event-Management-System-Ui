@@ -24,55 +24,8 @@ export interface SpeakerFormDialogData {
     MatButtonModule,
     ImageUploadComponent
   ],
-  template: `
-    <h2 mat-dialog-title>{{ data?.speaker ? 'Edit speaker' : 'Add speaker' }}</h2>
-    <mat-dialog-content>
-      <form [formGroup]="form" class="form">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Title / position</mat-label>
-          <input matInput formControlName="titlePosition" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Company</mat-label>
-          <input matInput formControlName="company" />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Bio</mat-label>
-          <textarea matInput rows="3" formControlName="bio"></textarea>
-        </mat-form-field>
-        <label class="field-label">Photo</label>
-        <app-image-upload formControlName="photoUrl" label="No photo yet"></app-image-upload>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Website URL</mat-label>
-          <input matInput formControlName="websiteUrl" placeholder="https://..." />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Linked user ID (optional)</mat-label>
-          <input matInput type="number" formControlName="userId" />
-        </mat-form-field>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-flat-button color="primary" [disabled]="form.invalid" (click)="save()">Save</button>
-    </mat-dialog-actions>
-  `,
-  styles: [
-    `
-      .form { display: flex; flex-direction: column; gap: 4px; min-width: 380px; }
-      .full-width { width: 100%; }
-      .field-label {
-        display: block;
-        font-size: 0.85rem;
-        color: var(--mat-sys-on-surface-variant);
-        margin: 8px 0 6px;
-      }
-    `,
-  ],
+  templateUrl: './speaker-form.dialog.html',
+  styleUrl: './speaker-form.dialog.css',
 })
 export class SpeakerFormDialogComponent {
   private readonly fb = inject(FormBuilder);

@@ -1,0 +1,8 @@
+.form { display: flex; flex-direction: column; gap: 4px; min-width: 380px; }
+.full-width { width: 100%; }
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--mat-sys-on-surface-variant);
+  margin: 8px 0 6px;
+}

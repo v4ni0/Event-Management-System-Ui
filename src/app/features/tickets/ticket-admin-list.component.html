@@ -1,0 +1,49 @@
+<div class="header">
+  <h3>Ticket types</h3>
+  <button mat-flat-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon> Add ticket
+  </button>
+</div>
+
+@if (loading()) {
+  <div class="center-spinner"><mat-spinner diameter="32"></mat-spinner></div>
+} @else if (tickets().length) {
+  <table mat-table [dataSource]="tickets()" class="full-width">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let t">
+        <strong>{{ t.name }}</strong>
+        @if (t.description) {
+          <div class="text-muted text-small">{{ t.description }}</div>
+        }
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let t">{{ t.price | number: '1.2-2' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="sold">
+      <th mat-header-cell *matHeaderCellDef>Sold / Available</th>
+      <td mat-cell *matCellDef="let t">{{ t.quantitySold }} / {{ t.quantityAvailable }}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let t"><app-status-chip [status]="t.status"></app-status-chip></td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let t">
+        <button mat-icon-button (click)="edit(t)" aria-label="Edit"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button (click)="remove(t)" aria-label="Delete"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="cols"></tr>
+    <tr mat-row *matRowDef="let row; columns: cols"></tr>
+  </table>
+} @else {
+  <app-empty-state
+    icon="local_activity"
+    title="No tickets yet"
+    message="Add a ticket type to start selling."
+  ></app-empty-state>
+}

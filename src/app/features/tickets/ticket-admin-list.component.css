@@ -1,0 +1,8 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.header h3 { margin: 0; font-weight: 500; }
+table { width: 100%; }

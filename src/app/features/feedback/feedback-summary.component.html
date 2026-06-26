@@ -1,0 +1,28 @@
+@if (loading()) {
+  <div class="center-spinner"><mat-spinner diameter="24"></mat-spinner></div>
+} @else if (summary(); as s) {
+  <div class="summary">
+    <div class="overall">
+      <div class="big">{{ overall() }}</div>
+      <div class="stars">
+        @for (n of [1, 2, 3, 4, 5]; track n) {
+          <mat-icon [class.filled]="overallNumber() >= n">
+            {{ overallNumber() >= n ? 'star' : 'star_border' }}
+          </mat-icon>
+        }
+      </div>
+      <div class="count text-muted text-small">{{ s.totalCount }} reviews</div>
+    </div>
+    <div class="breakdown">
+      @if (s.averageVenueRating != null) {
+        <div class="row"><span>Venue</span><strong>{{ formatScore(s.averageVenueRating) }}</strong></div>
+      }
+      @if (s.averageContentRating != null) {
+        <div class="row"><span>Content</span><strong>{{ formatScore(s.averageContentRating) }}</strong></div>
+      }
+      @if (s.averageOrganizationRating != null) {
+        <div class="row"><span>Organization</span><strong>{{ formatScore(s.averageOrganizationRating) }}</strong></div>
+      }
+    </div>
+  </div>
+}

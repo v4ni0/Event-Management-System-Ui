@@ -1,0 +1,63 @@
+<div class="page-container">
+  @if (loading()) {
+    <div class="center-spinner"><mat-spinner diameter="40"></mat-spinner></div>
+  } @else if (speaker(); as s) {
+    <app-page-header [title]="s.name" [subtitle]="s.titlePosition || ''">
+      <ng-container actions>
+        <a mat-button routerLink="/speakers">All speakers</a>
+        @if (canEdit()) {
+          <button mat-stroked-button (click)="edit()">
+            <mat-icon>edit</mat-icon> Edit
+          </button>
+          <button mat-flat-button color="primary" (click)="upload()">
+            <mat-icon>cloud_upload</mat-icon> Upload material
+          </button>
+        }
+      </ng-container>
+    </app-page-header>
+
+    <div class="grid">
+      <mat-card class="profile">
+        @if (s.photoUrl) {
+          <img [src]="s.photoUrl" [alt]="s.name" class="photo" />
+        } @else {
+          <div class="photo placeholder">
+            <mat-icon>person</mat-icon>
+          </div>
+        }
+        <mat-card-content>
+          @if (s.company) {
+            <p><strong>{{ s.company }}</strong></p>
+          }
+          @if (s.bio) {
+            <p>{{ s.bio }}</p>
+          }
+          @if (s.websiteUrl) {
+            <a [href]="s.websiteUrl" target="_blank" rel="noopener">
+              <mat-icon>open_in_new</mat-icon> {{ s.websiteUrl }}
+            </a>
+          }
+        </mat-card-content>
+      </mat-card>
+
+      <div class="materials">
+        <h3>Materials</h3>
+        @if (loadingMats()) {
+          <div class="center-spinner"><mat-spinner diameter="32"></mat-spinner></div>
+        } @else if (materials().length) {
+          <ul class="material-list">
+            @for (m of materials(); track m.id) {
+              <li>
+                <mat-icon>description</mat-icon>
+                <a [href]="m.fileUrl" target="_blank" rel="noopener">{{ m.fileName }}</a>
+                <span class="text-muted text-small">{{ m.fileType }} · {{ format(m.uploadedAt) }}</span>
+              </li>
+            }
+          </ul>
+        } @else {
+          <app-empty-state icon="description" title="No materials yet"></app-empty-state>
+        }
+      </div>
+    </div>
+  }
+</div>

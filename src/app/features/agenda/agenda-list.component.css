@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.header h3 { margin: 0; font-weight: 500; }
+.actions { display: flex; gap: 8px; }
+.agenda { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  align-items: flex-start;
+}
+.time-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 80px;
+  font-size: 0.9rem;
+}
+.time { font-weight: 600; }
+.time-end { color: var(--mat-sys-on-surface-variant); font-size: 0.85rem; }
+.content { flex: 1; }
+.title-row { display: flex; align-items: center; gap: 8px; }
+.meta {
+  margin-top: 8px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.85rem;
+}
+.meta span { display: inline-flex; align-items: center; gap: 4px; }
+.meta mat-icon { font-size: 16px; width: 16px; height: 16px; }
+.row-actions { display: flex; gap: 4px; }
+.chip { font-size: 0.7rem; min-height: 22px; }

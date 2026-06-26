@@ -27,62 +27,8 @@ export interface MaterialsUploadDialogData {
     MatIconModule,
     MatProgressSpinnerModule,
   ],
-  template: `
-    <h2 mat-dialog-title>Upload material</h2>
-    <mat-dialog-content>
-      <form [formGroup]="form" class="form">
-        <label class="file-picker">
-          <input
-            type="file"
-            (change)="onFile($event)"
-            accept=".pdf,.ppt,.pptx,.key,.zip,.png,.jpg,.jpeg"
-          />
-          @if (file()) {
-            <span><mat-icon>description</mat-icon>{{ file()!.name }}</span>
-          } @else {
-            <span><mat-icon>cloud_upload</mat-icon>Choose file…</span>
-          }
-        </label>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Agenda item ID (optional)</mat-label>
-          <input matInput type="number" formControlName="agendaItemId" />
-        </mat-form-field>
-        <p class="muted small">
-          Note: backend stores files via Cloudinary. If not configured, upload will fail with a
-          server message.
-        </p>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button
-        mat-flat-button
-        color="primary"
-        [disabled]="!file() || saving()"
-        (click)="save()"
-      >
-        @if (saving()) { <mat-spinner diameter="18"></mat-spinner> } @else { Upload }
-      </button>
-    </mat-dialog-actions>
-  `,
-  styles: [
-    `
-      .form { display: flex; flex-direction: column; gap: 8px; min-width: 360px; }
-      .file-picker {
-        border: 1px dashed var(--mat-sys-outline);
-        border-radius: 8px;
-        padding: 14px 12px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .file-picker input { display: none; }
-      .full-width { width: 100%; }
-      .muted { color: var(--mat-sys-on-surface-variant); }
-      .small { font-size: 0.85rem; }
-    `,
-  ],
+  templateUrl: './materials-upload.dialog.html',
+  styleUrl: './materials-upload.dialog.css',
 })
 export class MaterialsUploadDialogComponent {
   private readonly fb = inject(FormBuilder);

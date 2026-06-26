@@ -1,0 +1,88 @@
+<h2 mat-dialog-title>Rate "{{ data.eventTitle }}"</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" class="form">
+    <div class="rating-row">
+      <span class="rating-label">Overall</span>
+      <span class="stars">
+        @for (n of [1, 2, 3, 4, 5]; track n) {
+          <button
+            type="button"
+            mat-icon-button
+            (click)="form.controls.overallRating.setValue(n)"
+            [attr.aria-label]="n + ' stars'"
+          >
+            <mat-icon class="star" [class.filled]="(form.controls.overallRating.value ?? 0) >= n">
+              {{ (form.controls.overallRating.value ?? 0) >= n ? 'star' : 'star_border' }}
+            </mat-icon>
+          </button>
+        }
+      </span>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">Venue</span>
+      <span class="stars">
+        @for (n of [1, 2, 3, 4, 5]; track n) {
+          <button
+            type="button"
+            mat-icon-button
+            (click)="form.controls.venueRating.setValue(n)"
+            [attr.aria-label]="n + ' stars'"
+          >
+            <mat-icon class="star" [class.filled]="(form.controls.venueRating.value ?? 0) >= n">
+              {{ (form.controls.venueRating.value ?? 0) >= n ? 'star' : 'star_border' }}
+            </mat-icon>
+          </button>
+        }
+      </span>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">Content</span>
+      <span class="stars">
+        @for (n of [1, 2, 3, 4, 5]; track n) {
+          <button
+            type="button"
+            mat-icon-button
+            (click)="form.controls.contentRating.setValue(n)"
+            [attr.aria-label]="n + ' stars'"
+          >
+            <mat-icon class="star" [class.filled]="(form.controls.contentRating.value ?? 0) >= n">
+              {{ (form.controls.contentRating.value ?? 0) >= n ? 'star' : 'star_border' }}
+            </mat-icon>
+          </button>
+        }
+      </span>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">Organization</span>
+      <span class="stars">
+        @for (n of [1, 2, 3, 4, 5]; track n) {
+          <button
+            type="button"
+            mat-icon-button
+            (click)="form.controls.organizationRating.setValue(n)"
+            [attr.aria-label]="n + ' stars'"
+          >
+            <mat-icon class="star" [class.filled]="(form.controls.organizationRating.value ?? 0) >= n">
+              {{ (form.controls.organizationRating.value ?? 0) >= n ? 'star' : 'star_border' }}
+            </mat-icon>
+          </button>
+        }
+      </span>
+    </div>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Comment</mat-label>
+      <textarea matInput rows="3" formControlName="comment"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="form.invalid"
+    (click)="save()"
+  >
+    Submit feedback
+  </button>
+</mat-dialog-actions>

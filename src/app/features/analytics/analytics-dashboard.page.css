@@ -1,0 +1,17 @@
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+mat-card { padding: 16px; }
+.t-label {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.t-value { font-size: 1.6rem; font-weight: 600; margin-top: 4px; }
+.chart-card { padding: 24px; }
+.chart-card h3 { margin: 0 0 16px; font-weight: 500; }
+.chart { display: block; width: 100%; height: auto; }

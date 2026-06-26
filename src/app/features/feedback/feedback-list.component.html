@@ -1,0 +1,40 @@
+@if (loading()) {
+  <div class="center-spinner"><mat-spinner diameter="32"></mat-spinner></div>
+} @else if (rows().length) {
+  <ul class="reviews">
+    @for (f of rows(); track f.id) {
+      <li class="review">
+        <div class="head">
+          <div class="stars">
+            @for (n of [1, 2, 3, 4, 5]; track n) {
+              <mat-icon [class.filled]="f.overallRating >= n">
+                {{ f.overallRating >= n ? 'star' : 'star_border' }}
+              </mat-icon>
+            }
+          </div>
+          <span class="when text-muted text-small">{{ format(f.submittedAt) }}</span>
+        </div>
+        @if (f.comment) {
+          <p>{{ f.comment }}</p>
+        }
+        <div class="sub-ratings text-muted text-small">
+          @if (f.venueRating) {
+            <span>Venue: {{ f.venueRating }}/5</span>
+          }
+          @if (f.contentRating) {
+            <span>Content: {{ f.contentRating }}/5</span>
+          }
+          @if (f.organizationRating) {
+            <span>Organization: {{ f.organizationRating }}/5</span>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+} @else {
+  <app-empty-state
+    icon="rate_review"
+    title="No feedback yet"
+    message="Once attendees submit reviews, they will appear here."
+  ></app-empty-state>
+}

@@ -1,0 +1,12 @@
+.form { display: flex; flex-direction: column; gap: 8px; min-width: 360px; }
+.rating-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.rating-label { color: var(--mat-sys-on-surface); font-weight: 500; }
+.stars { display: inline-flex; }
+.star { color: var(--mat-sys-outline); }
+.star.filled { color: #f5b400; }
+.full-width { width: 100%; }

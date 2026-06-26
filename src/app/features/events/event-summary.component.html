@@ -1,0 +1,30 @@
+@if (loading()) {
+  <div class="center-spinner"><mat-spinner diameter="24"></mat-spinner></div>
+} @else if (summary(); as s) {
+  <div class="grid">
+    <div class="tile">
+      <div class="tile-label">Registrations</div>
+      <div class="tile-value">{{ s.totalRegistrations }}</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Check-ins</div>
+      <div class="tile-value">{{ s.totalCheckIns }}</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Available capacity</div>
+      <div class="tile-value">{{ s.availableCapacity }}</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Ticket types</div>
+      <div class="tile-value">{{ s.ticketTypesCount }}</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Avg rating</div>
+      <div class="tile-value">{{ s.averageRating != null ? (s.averageRating | number: '1.1-1') : '—' }}</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Revenue</div>
+      <div class="tile-value">{{ s.revenue != null ? (s.revenue | number: '1.2-2') : '—' }}</div>
+    </div>
+  </div>
+}

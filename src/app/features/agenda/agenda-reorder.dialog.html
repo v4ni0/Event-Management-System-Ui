@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Reorder agenda</h2>
+<mat-dialog-content>
+  <p class="muted">Drag items to reorder.</p>
+  <ul cdkDropList class="reorder-list" (cdkDropListDropped)="drop($event)">
+    @for (item of items; track item.id) {
+      <li cdkDrag class="reorder-item">
+        <mat-icon class="grip">drag_indicator</mat-icon>
+        <div class="text">
+          <strong>{{ item.title }}</strong>
+          <span class="muted small">{{ time(item.startTime) }} – {{ time(item.endTime) }}</span>
+        </div>
+      </li>
+    }
+  </ul>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" (click)="save()">Save order</button>
+</mat-dialog-actions>

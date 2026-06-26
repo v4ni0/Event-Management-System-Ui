@@ -1,0 +1,4 @@
+.ticket-form { display: flex; flex-direction: column; gap: 4px; min-width: 360px; }
+.row { display: flex; gap: 12px; }
+.row > * { flex: 1; }
+.full-width { width: 100%; }

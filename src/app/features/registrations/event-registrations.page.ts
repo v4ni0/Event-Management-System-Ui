@@ -30,79 +30,8 @@ import { formatDateTime } from '../../core/util/date';
     StatusChipComponent,
     EmptyStateComponent,
   ],
-  template: `
-    <div class="page-container">
-      <app-page-header
-        title="Registrations"
-        subtitle="Check in attendees as they arrive."
-      >
-        <a mat-button [routerLink]="['/events', eventId()]">Back to event</a>
-      </app-page-header>
-
-      @if (loading()) {
-        <div class="center-spinner"><mat-spinner diameter="40"></mat-spinner></div>
-      } @else if (rows().length) {
-        <mat-card>
-          <table mat-table [dataSource]="rows()" class="full-width">
-            <ng-container matColumnDef="confirmation">
-              <th mat-header-cell *matHeaderCellDef>Confirmation</th>
-              <td mat-cell *matCellDef="let r"><code>{{ r.confirmationCode }}</code></td>
-            </ng-container>
-            <ng-container matColumnDef="user">
-              <th mat-header-cell *matHeaderCellDef>User #</th>
-              <td mat-cell *matCellDef="let r">{{ r.userId }}</td>
-            </ng-container>
-            <ng-container matColumnDef="ticket">
-              <th mat-header-cell *matHeaderCellDef>Ticket #</th>
-              <td mat-cell *matCellDef="let r">{{ r.ticketId }}</td>
-            </ng-container>
-            <ng-container matColumnDef="registered">
-              <th mat-header-cell *matHeaderCellDef>Registered</th>
-              <td mat-cell *matCellDef="let r">{{ format(r.registeredAt) }}</td>
-            </ng-container>
-            <ng-container matColumnDef="status">
-              <th mat-header-cell *matHeaderCellDef>Status</th>
-              <td mat-cell *matCellDef="let r"><app-status-chip [status]="r.status"></app-status-chip></td>
-            </ng-container>
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let r">
-                @if (r.status === 'CONFIRMED') {
-                  <button mat-flat-button color="primary" (click)="checkIn(r)">
-                    <mat-icon>how_to_reg</mat-icon> Check in
-                  </button>
-                } @else if (r.status === 'CHECKED_IN') {
-                  <span class="muted">Checked in {{ format(r.checkedInAt) }}</span>
-                }
-              </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="cols"></tr>
-            <tr mat-row *matRowDef="let row; columns: cols"></tr>
-          </table>
-        </mat-card>
-      } @else {
-        <app-empty-state
-          icon="how_to_reg"
-          title="No registrations yet"
-          message="Once attendees buy tickets, they will appear here."
-        ></app-empty-state>
-      }
-    </div>
-  `,
-  styles: [
-    `
-      mat-card { padding: 0; overflow: hidden; }
-      table { width: 100%; }
-      .muted { color: var(--mat-sys-on-surface-variant); font-size: 0.85rem; }
-      code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        background: var(--mat-sys-surface-variant);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-size: 0.85rem;
-      }
-    `,
-  ],
+  templateUrl: './event-registrations.page.html',
+  styleUrl: './event-registrations.page.css',
 })
 export class EventRegistrationsPage implements OnInit {
   private readonly route = inject(ActivatedRoute);

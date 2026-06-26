@@ -25,79 +25,8 @@ import { AuthService } from '../../core/services/auth.service';
     MatProgressSpinnerModule,
     MatIconModule,
   ],
-  template: `
-    <div class="auth-shell">
-      <mat-card class="auth-card">
-        <mat-card-header>
-          <mat-card-title>Sign in</mat-card-title>
-          <mat-card-subtitle>Welcome back to EventFlow.</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <form [formGroup]="form" (ngSubmit)="submit()">
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" formControlName="email" autocomplete="email" />
-              @if (form.controls.email.hasError('email') && form.controls.email.touched) {
-                <mat-error>Enter a valid email.</mat-error>
-              }
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Password</mat-label>
-              <input
-                matInput
-                [type]="showPassword() ? 'text' : 'password'"
-                formControlName="password"
-                autocomplete="current-password"
-              />
-              <button
-                type="button"
-                mat-icon-button
-                matSuffix
-                (click)="showPassword.set(!showPassword())"
-                aria-label="Toggle password visibility"
-              >
-                <mat-icon>{{ showPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
-              </button>
-            </mat-form-field>
-            <button
-              mat-flat-button
-              color="primary"
-              type="submit"
-              class="full-width"
-              [disabled]="form.invalid || loading()"
-            >
-              @if (loading()) {
-                <mat-spinner diameter="20"></mat-spinner>
-              } @else {
-                Sign in
-              }
-            </button>
-          </form>
-          <p class="hint">
-            New here?
-            <a routerLink="/register">Create an account</a>
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  `,
-  styles: [
-    `
-      .auth-shell {
-        min-height: calc(100vh - 60px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 24px 16px;
-      }
-      .auth-card { width: 100%; max-width: 420px; padding: 8px 4px 16px; }
-      mat-card-header { margin-bottom: 16px; }
-      form { display: flex; flex-direction: column; gap: 8px; }
-      .full-width { width: 100%; }
-      .hint { margin-top: 16px; text-align: center; font-size: 0.9rem; }
-      mat-spinner { margin: 0 auto; }
-    `,
-  ],
+  templateUrl: './login.page.html',
+  styleUrl: './login.page.css',
 })
 export class LoginPage {
   private readonly fb = inject(FormBuilder);

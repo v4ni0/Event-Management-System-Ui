@@ -1,0 +1,59 @@
+<div class="header">
+  <h3>Agenda</h3>
+  @if (canEdit()) {
+    <div class="actions">
+      <button mat-stroked-button (click)="openReorder()" [disabled]="items().length < 2">
+        <mat-icon>swap_vert</mat-icon> Reorder
+      </button>
+      <button mat-flat-button color="primary" (click)="add()">
+        <mat-icon>add</mat-icon> Add item
+      </button>
+    </div>
+  }
+</div>
+
+@if (loading()) {
+  <div class="center-spinner"><mat-spinner diameter="32"></mat-spinner></div>
+} @else if (items().length) {
+  <ol class="agenda">
+    @for (it of items(); track it.id) {
+      <li class="item">
+        <div class="time-col">
+          <div class="time">{{ time(it.startTime) }}</div>
+          <div class="time-end">{{ time(it.endTime) }}</div>
+        </div>
+        <div class="content">
+          <div class="title-row">
+            <strong>{{ it.title }}</strong>
+            @if (it.type) {
+              <mat-chip class="chip" disableRipple>{{ pretty(it.type) }}</mat-chip>
+            }
+          </div>
+          @if (it.description) {
+            <p class="text-muted">{{ it.description }}</p>
+          }
+          <div class="meta">
+            @if (it.locationRoom) {
+              <span><mat-icon>place</mat-icon>{{ it.locationRoom }}</span>
+            }
+            @if (it.speakerId) {
+              <span><mat-icon>person</mat-icon>{{ speakerName(it.speakerId) }}</span>
+            }
+          </div>
+        </div>
+        @if (canEdit()) {
+          <div class="row-actions">
+            <button mat-icon-button (click)="edit(it)" aria-label="Edit"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button (click)="remove(it)" aria-label="Delete"><mat-icon>delete</mat-icon></button>
+          </div>
+        }
+      </li>
+    }
+  </ol>
+} @else {
+  <app-empty-state
+    icon="schedule"
+    title="No agenda items yet"
+    message="Once the schedule is published, it will show here."
+  ></app-empty-state>
+}
