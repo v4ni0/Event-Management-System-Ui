@@ -26,4 +26,10 @@ export class FeedbackService {
       `${API_BASE_URL}/events/${eventId}/feedback/summary`,
     );
   }
+
+  aiSummary(eventId: number): Observable<string> {
+    return this.http.get(`${API_BASE_URL}/events/${eventId}/feedback/ai-summary`, {
+      responseType: 'text',
+    });
+  }
 }

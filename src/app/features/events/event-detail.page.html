@@ -136,6 +136,15 @@
       <mat-tab label="Feedback">
         <div class="tab-body">
           <app-feedback-summary [eventId]="e.id"></app-feedback-summary>
+          <div class="mt-24">
+            <button mat-stroked-button (click)="loadAiSummary()" [disabled]="aiSummaryLoading()">
+              <mat-icon>auto_awesome</mat-icon>
+              {{ aiSummaryLoading() ? 'Generating…' : 'Generate AI Summary' }}
+            </button>
+            @if (aiSummary()) {
+              <div class="ai-summary-text mt-16" [innerHTML]="aiSummary()"></div>
+            }
+          </div>
           @if (canManage()) {
             <h3 class="mt-24">All reviews</h3>
             <app-feedback-list [eventId]="e.id"></app-feedback-list>

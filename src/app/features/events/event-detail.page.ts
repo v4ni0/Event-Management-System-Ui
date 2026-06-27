@@ -73,6 +73,8 @@ export class EventDetailPage implements OnInit {
   readonly event = signal<EventResponse | null>(null);
   readonly tickets = signal<TicketResponse[]>([]);
   readonly myRegs = signal<RegistrationResponse[]>([]);
+  readonly aiSummary = signal<string | null>(null);
+  readonly aiSummaryLoading = signal(false);
   readonly format = formatDateTime;
   readonly pretty = prettyEnum;
   readonly statuses = EVENT_STATUSES;
@@ -172,6 +174,22 @@ export class EventDetailPage implements OnInit {
       next: (updated) => {
         this.event.set(updated);
         this.snack.open(`Status changed to ${this.pretty(status)}`, 'OK', { duration: 2000 });
+      },
+    });
+  }
+
+  loadAiSummary(): void {
+    const e = this.event();
+    if (!e) return;
+    this.aiSummaryLoading.set(true);
+    this.feedbackApi.aiSummary(e.id).subscribe({
+      next: (text) => {
+        this.aiSummary.set(text);
+        this.aiSummaryLoading.set(false);
+      },
+      error: () => {
+        this.snack.open('Failed to load AI summary', 'OK', { duration: 3000 });
+        this.aiSummaryLoading.set(false);
       },
     });
   }
