@@ -71,7 +71,6 @@
   margin-right: .4rem;
 }
 
-.loc-icon { color: #948f8d; }
 
 .seg-input {
   border: none;
@@ -84,13 +83,6 @@
 }
 
 .seg-input::placeholder { color: #888; }
-
-.search-divider {
-  width: 1px;
-  height: 24px;
-  background: #444;
-  flex-shrink: 0;
-}
 
 .search-btn {
   width: 42px;
@@ -171,7 +163,6 @@
 
 @media (max-width: 720px) {
   .logo-text { display: none; }
-  .search-divider { display: none; }
   .search-bar { max-width: 200px; }
   .user-name { display: none; }
 }

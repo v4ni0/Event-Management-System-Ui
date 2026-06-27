@@ -11,23 +11,12 @@
 
     <div class="search-bar">
       <div class="search-segment">
-        <mat-icon class="seg-icon">search</mat-icon>
-        <input
-          class="seg-input"
-          type="text"
-          placeholder="Search events"
-          [(ngModel)]="searchQuery"
-          (keydown.enter)="onSearch()"
-        />
-      </div>
-      <div class="search-divider"></div>
-      <div class="search-segment">
-        <mat-icon class="seg-icon loc-icon">place</mat-icon>
+        <mat-icon class="seg-icon">place</mat-icon>
         <input
           class="seg-input"
           type="text"
           placeholder="City"
-          [(ngModel)]="location"
+          [(ngModel)]="city"
           (keydown.enter)="onSearch()"
         />
       </div>

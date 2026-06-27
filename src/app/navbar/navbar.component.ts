@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -19,9 +19,9 @@ import { RoleChipComponent } from '../shared/role-chip.component';
     RouterLinkActive,
     FormsModule,
     MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
     RoleChipComponent,
+    MatIconModule,
+    MatMenuModule
   ],
   templateUrl: 'navbar.component.html',
   styleUrl: 'navbar.component.css',
@@ -31,36 +31,31 @@ export class NavbarComponent {
   private readonly router = inject(Router);
   private readonly snack = inject(MatSnackBar);
 
+  protected city = '';
+
   readonly user = this.auth.currentUserSignal;
   readonly displayName = computed(() => {
-    const u = this.user();
-    return u ? `${u.firstName} ${u.lastName}`.trim() || u.email : '';
+    const user = this.user();
+    return user ? `${user.firstName} ${user.lastName}`.trim() || user.email : '';
   });
+
   readonly canCreateEvents = computed(() => {
     const role = this.user()?.role;
     return role === 'ORGANIZER' || role === 'ADMIN';
   });
+
   readonly isAdmin = computed(() => this.user()?.role === 'ADMIN');
 
-  protected searchQuery = '';
-  protected location = '';
-
-  onSearch(): void {
-    const queryParams: Record<string, string | null> = {
-      city: this.location || null,
-    };
-    if (this.searchQuery) {
-      queryParams['q'] = this.searchQuery;
-    }
-    this.router.navigate(['/events'], { queryParams });
+  onSearch() : void {
+    this.router.navigate(['/events'], { queryParams: { city: this.city || null } });
   }
 
-  signOut(): void {
-    this.auth.logout().subscribe({
-      next: () => {
-        this.snack.open('Signed out', 'OK', { duration: 2000 });
+  signOut() : void {
+    this.auth.logout().subscribe({                                                                                                             
+      next: () => {                                                                                                                            
+        this.snack.open('Signed out', 'OK', { duration: 2000 });                                                                               
         this.router.navigate(['/']);
-      },
+      }
     });
   }
 }
