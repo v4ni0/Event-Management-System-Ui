@@ -42,9 +42,9 @@ export class AdminUsersPage implements OnInit {
     this.fetch();
   }
 
-  onPage(ev: PageEvent): void {
-    this.currentPage = ev.pageIndex;
-    this.pageSize = ev.pageSize;
+  onPage(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
     this.fetch();
   }
 
