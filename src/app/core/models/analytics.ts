@@ -10,6 +10,6 @@ export interface EventAnalyticsResponse {
 }
 
 export interface AttendancePoint {
-  day: string; // ISO yyyy-MM-dd
+  day: string; 
   count: number;
 }

@@ -7,6 +7,7 @@ import { API_BASE_URL } from '../util/api-base';
 
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
+  
   private readonly http = inject(HttpClient);
 
   dashboard(eventId: number): Observable<EventAnalyticsResponse> {
