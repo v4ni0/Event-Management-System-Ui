@@ -92,6 +92,14 @@ export class AuthService {
     );
   }
 
+  forgotPassword(email: string): Observable<void> {
+    return this.http.post<void>(`${API_BASE_URL}/auth/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<void> {
+    return this.http.post<void>(`${API_BASE_URL}/auth/reset-password`, { token, newPassword });
+  }
+
   /** Local-only logout used by the error interceptor on 401s. */
   clearSession(): void {
     this.storage.clear();
